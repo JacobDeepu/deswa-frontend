@@ -3,6 +3,7 @@ import Header from "./layout/Header";
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
+import Employee from "./pages/Employee";
 
 function App() {
     return (
@@ -12,6 +13,7 @@ function App() {
                 <Route exact path="/" element={<Home />} />
                 <Route exact path="/signup" element={<SignUp />} />
                 <Route exact path="/signin" element={<SignIn />} />
+                <Route exact path="/employee" element={<Employee />} />
             </Routes>
         </BrowserRouter>
     );
