@@ -21,7 +21,7 @@ const SignUpForm = () => {
                 // Signed in
                 const user = userCredential.user;
                 console.log(user);
-                navigate("/login");
+                navigate("/select");
             })
             .catch((error) => {
                 const errorCode = error.code;
