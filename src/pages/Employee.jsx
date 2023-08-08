@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import ScrollAnimationWrapper from "../layout/ScrollAnimationWrapper";
 import GetScrollAnimation from "../components/GetScrollAnimation";
-import { auth, db } from "../firebase";
+import { db } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
 
 const Employee = () => {
     const scrollAnimation = useMemo(() => GetScrollAnimation(), []);
