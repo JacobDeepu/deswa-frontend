@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link as LinkScroll } from "react-scroll";
 import ButtonOutline from "../components/ButtonOutline";
 import Logo from "../assets/logo.svg";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
     const [activeLink, setActiveLink] = useState(null);
@@ -11,6 +12,9 @@ const Header = () => {
             setScrollActive(window.scrollY > 20);
         });
     }, []);
+
+    const navigate = useNavigate();
+
     return (
         <>
             <header className={"fixed top-0 w-full  z-30 bg-white-500 transition-all " + (scrollActive ? "shadow-md pt-0" : " pt-4")}>
@@ -37,10 +41,10 @@ const Header = () => {
                         </LinkScroll>
                     </ul>
                     <div className="col-start-10 col-end-12 font-medium flex justify-end items-center">
-                        <a href="/" className="text-black-600 mx-2 sm:mx-4 capitalize tracking-wide hover:text-orange-500 transition-all">
+                        <Link to="/signin" className="text-black-600 mx-2 sm:mx-4 capitalize tracking-wide hover:text-orange-500 transition-all">
                             Sign In
-                        </a>
-                        <ButtonOutline>Sign Up</ButtonOutline>
+                        </Link>
+                        <ButtonOutline onClick={() => navigate("/signup")}>Sign Up</ButtonOutline>
                     </div>
                 </nav>
             </header>
