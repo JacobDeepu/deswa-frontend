@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import ScrollAnimationWrapper from "../layout/ScrollAnimationWrapper";
 import GetScrollAnimation from "../components/GetScrollAnimation";
+import { auth, db } from "../firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 const Employee = () => {
     const scrollAnimation = useMemo(() => GetScrollAnimation(), []);
@@ -12,6 +15,24 @@ const Employee = () => {
     const [address, setAddress] = useState("");
     const [mobile, setMobile] = useState("");
     const [aadhar, setAadhar] = useState("");
+
+    const addEmployee = async (e) => {
+        e.preventDefault();
+        try {
+            const uid = localStorage.getItem("uid");
+            console.log("Test", uid);
+            await setDoc(doc(db, "employee", uid), {
+                name: name,
+                address: address,
+                mobile: mobile,
+                aadhar: aadhar,
+            });
+            console.log("Document written");
+            navigate("/");
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    };
 
     return (
         <>
@@ -104,6 +125,7 @@ const Employee = () => {
                                         </div>
                                         <button
                                             type="submit"
+                                            onClick={addEmployee}
                                             className="w-full font-medium tracking-wide py-2 px-5 sm:px-8 border border-orange-500 text-orange-500 bg-white-500 outline-none rounded-l-full rounded-r-full capitalize hover:bg-orange-500 hover:text-white-500 transition-all hover:shadow-orange"
                                         >
                                             Register

@@ -23,6 +23,7 @@ const Header = () => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 const uid = user.uid;
+                localStorage.setItem("uid", user.uid);
                 setIsLoggedIn(true);
                 console.log("uid", uid);
             } else {
