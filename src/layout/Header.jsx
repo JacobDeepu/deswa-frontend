@@ -3,6 +3,8 @@ import { Link as LinkScroll } from "react-scroll";
 import ButtonOutline from "../components/ButtonOutline";
 import Logo from "../assets/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../firebase";
 
 const Header = () => {
     const [activeLink, setActiveLink] = useState(null);
@@ -14,6 +16,33 @@ const Header = () => {
     }, []);
 
     const navigate = useNavigate();
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const uid = user.uid;
+                setIsLoggedIn(true);
+                console.log("uid", uid);
+            } else {
+                console.log("user is logged out");
+            }
+        });
+    }, []);
+
+    const handleLogout = () => {
+        signOut(auth)
+            .then(() => {
+                // Sign-out successful.
+                navigate("/");
+                setIsLoggedIn(false);
+                console.log("Signed out successfully");
+            })
+            .catch((error) => {
+                // An error happened.
+            });
+    };
 
     return (
         <>
@@ -41,10 +70,14 @@ const Header = () => {
                         </LinkScroll>
                     </ul>
                     <div className="col-start-10 col-end-12 font-medium flex justify-end items-center">
-                        <Link to="/signin" className="text-black-600 mx-2 sm:mx-4 capitalize tracking-wide hover:text-orange-500 transition-all">
-                            Sign In
-                        </Link>
-                        <ButtonOutline onClick={() => navigate("/signup")}>Sign Up</ButtonOutline>
+                        {isLoggedIn ? (
+                            ""
+                        ) : (
+                            <Link to="/signin" className="text-black-600 mx-2 sm:mx-4 capitalize tracking-wide hover:text-orange-500 transition-all">
+                                Sign In
+                            </Link>
+                        )}
+                        {isLoggedIn ? <ButtonOutline onClick={handleLogout}>Sign Out</ButtonOutline> : <ButtonOutline onClick={() => navigate("/signup")}>Sign Up</ButtonOutline>}
                     </div>
                 </nav>
             </header>
