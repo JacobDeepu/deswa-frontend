@@ -6,6 +6,7 @@ import SignIn from "./pages/SignIn";
 import Employee from "./pages/Employee";
 import Employer from "./pages/Employer";
 import Selection from "./pages/Selection";
+import JobCreation from "./pages/JobCreation";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                 <Route exact path="/employee" element={<Employee />} />
                 <Route exact path="/employer" element={<Employer />} />
                 <Route exact path="/select" element={<Selection />} />
+                <Route exact path="/create-job" element={<JobCreation />} />
             </Routes>
         </BrowserRouter>
     );
