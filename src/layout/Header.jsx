@@ -71,6 +71,22 @@ const Header = () => {
                         >
                             Home
                         </LinkScroll>
+                        <LinkScroll
+                            activeClass="active"
+                            to="about"
+                            spy={true}
+                            smooth={true}
+                            duration={1000}
+                            onSetActive={() => {
+                                setActiveLink("about");
+                            }}
+                            className={
+                                "px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative " +
+                                (activeLink === "/about" ? " text-orange-500 animation-active " : "text-black-500 hover:text-orange-500")
+                            }
+                        >
+                            About
+                        </LinkScroll>
                         <Link to="/create-job" className="px-4 py-2 mx-2 cursor-pointer animation-hover inline-block relative text-black-500 hover:text-orange-500">
                             Post a Job
                         </Link>

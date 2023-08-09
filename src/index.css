@@ -24,3 +24,17 @@ p {
 .animation-hover:hover:after {
     @apply left-0 w-full;
 }
+li.custom-list:before {
+    content: "\2022"; /* bullet point, for screen readers */
+    text-indent: -9999999px; /* move the bullet point out of sight */
+
+    width: 0.4em;
+    height: 1em;
+    background-repeat: no-repeat;
+
+    background-size: 0.4em 0.7em;
+    background-position: 0 0.3em;
+    font-size: 300%;
+    top: -0.35em;
+    @apply absolute block;
+}
